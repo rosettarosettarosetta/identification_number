@@ -1,9 +1,11 @@
 import torch
 import torchvision
+import visualize
 import matplotlib.pyplot as plt
 
 #参数
 BATCH_SIZE = 50
+EPOCHS=5
 LR = 0.001  # 学习率
 
 #数据部分
@@ -28,3 +30,8 @@ train_loader = torch.utils.data.DataLoader(   #数据加载器
     batch_size=BATCH_SIZE,    #样本数量
     shuffle=True  # 是否打乱数据
 )
+
+X, y = next(iter(torch.utils.data.DataLoader(train_data, batch_size=18)))
+y_titles = [str(label.item()) for label in y]  # 将 y 转换为字符串列表
+visualize.show_images(X.reshape(18, 28, 28), 2, 9, titles=y_titles)
+plt.show()
